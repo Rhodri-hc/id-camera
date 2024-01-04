@@ -1,0 +1,16 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit"
+  },
+  "stylelint.validate": ["css", "less", "scss"],
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "tsx",
+    "html"
+  ],
+  "typescript.tsdk": "node_modules/typescript/lib"
+}

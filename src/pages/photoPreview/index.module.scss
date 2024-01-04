@@ -1,0 +1,47 @@
+.photo-preview {
+  background: url("https://a.manchengkj.com/id-camera-miniprogram/images/img_bg_photo_preview.png") center no-repeat;
+  background-color: cover;
+  .tabs {
+    &.active {
+      @apply tw-text-primary tw-relative;
+      &::before {
+        @apply tw-absolute tw-h-1 tw-w-3.5 tw-rounded-md tw-left-1/2 tw-bottom-0 tw-bg-primary;
+        transform: translate(-50%, 100%);
+        content: '';
+      }
+    }
+    &.red-dot {
+      @apply tw-relative;
+      &::after {
+        @apply tw-absolute tw-h-1 tw-w-1 tw-rounded-full tw-top-0 -tw-right-1;
+        content: '';
+        background-color: #FF6767;
+      }
+    }
+  }
+  .sub-tabs {
+    &.active {
+      @apply tw-text-primary;
+      background-color: rgba(126, 106, 255, 0.10);
+      border-radius: 14px;
+    }
+  }
+  .color-selected {
+    border: 6px solid #ECE9F8;
+  }
+  .beauty-selected {
+    .beauty-text{
+      @apply tw-text-primary;
+    }
+    .beauty-icon {
+      border: 1px solid var(--color-primary);
+    }
+  }
+  .navigation-item {
+    @apply tw-py-1 tw-px-4;
+    color: rgba(19, 20, 21, 0.36);
+    &.active {
+      @apply tw-text-primary tw-bg-white tw-rounded-2xl;
+    }
+  }
+}

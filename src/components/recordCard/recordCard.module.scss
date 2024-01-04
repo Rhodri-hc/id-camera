@@ -1,0 +1,49 @@
+.record-card{
+  border-radius: 12px;
+  background: #FFF;
+  padding: 16px;
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .header-left {
+      display: flex;
+      align-items: center;
+      .title {
+        padding-left: 4px;
+        font-size: 16px;
+        font-weight: 500;
+      }
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+      .more {
+        color: rgba(19, 20, 21, 0.50);
+        text-align: right;
+        font-size: 12px;
+      }
+    }
+  }
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .no-data {
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      &__img {
+        width: 112px;
+        height: 76px;
+      }
+      &__text {
+        margin-top: 12px;
+        color: rgba(19, 20, 21, 0.36);
+        font-size: 12px;
+      }
+    }
+  }
+}

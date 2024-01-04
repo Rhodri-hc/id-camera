@@ -1,0 +1,31 @@
+.home {
+  .home-swiper {
+    :global(.van-swiper__pagination) {
+      left: 20px;
+      bottom: 32px;
+      transform: translateX(0);
+    }
+  }
+  &-scroll {
+    .scroll-item{
+      .active {
+        border-radius: 60px;
+        border: 1px solid #B3C8FF;
+        background: #FFF;
+      }
+    }
+  }
+  &-card {
+    margin-top: 12px;
+    // 支付宝小程序貌似不支持
+    // & > View:not(:last-child) {
+    //   margin-bottom: 12px;
+    // }
+    &__item {
+      &:not(:last-child)  {
+        margin-bottom: 12px;
+
+      }
+    }
+  }
+}

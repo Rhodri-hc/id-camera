@@ -1,0 +1,52 @@
+.vip-card{
+  position: relative;
+  .bg {
+    width: 100%;
+  }
+  &__container {
+    position: absolute;
+    left: 20px;
+    top: 16px;
+    bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .info {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      .title {
+        width: 80px;
+        height: 36px;
+      }
+      .desc {
+        color: #625D80;
+        padding: 4px 0;
+        font-size: 12px;
+      }
+    }
+    .activate-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFF;
+      text-align: center;
+      width: 100px;
+      height: 32px;
+      font-weight: 500;
+      border-radius: 16px;
+      background: linear-gradient(96deg, #FF9BEF 5.94%, #7E6AFF 96.19%);
+    }
+    .renew-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100px;
+      height: 32px;
+      color: #A99CFF;
+      font-weight: 500;
+      border-radius: 16px;
+      border: 1px solid #BCB1FF;
+    }
+  }
+}

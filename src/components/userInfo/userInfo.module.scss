@@ -1,0 +1,27 @@
+.user-info {
+  display: flex;
+  width: 100%;
+  &__avatar {
+    width: 56px;
+    height: 56px;
+    margin-right: 8px;
+  }
+  &__container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #FFF;
+    padding: 2px 0;
+    .username{
+      font-size: 20px;
+      font-weight: 500;
+      padding: 4px 0;
+    }
+    .user-id{
+      color: rgba(255, 255, 255, 0.60);
+      font-size: 12px;
+      padding: 2px 0;
+    }
+  }
+}

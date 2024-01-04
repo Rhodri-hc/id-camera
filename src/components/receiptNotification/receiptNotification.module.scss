@@ -1,0 +1,47 @@
+.receipt-notification {
+  padding: 6px 20px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #CBF8D7 url("https://a.manchengkj.com/id-camera-miniprogram/images/img_state_texture.png") center no-repeat;
+  background-size: cover;
+  &__left{
+    display: flex;
+    flex-direction: column;
+    .desc {
+      font-size: 10px;
+      padding: 2px 0;
+      color: #1AA03E;
+    }
+    .title {
+      padding: 2px 0;
+      font-size: 12px;
+    }
+  }
+  &__right{}
+  &--error{
+    background-color: #FFECEC;
+    .receipt-notification__left {
+      .desc {
+        color: #E82F2F;
+      }
+    }
+  }
+  &--success{
+    background-color: #CBF8D7;
+    .receipt-notification__left {
+      .desc {
+        color: #1AA03E;
+      }
+    }
+  }
+  &--warn{
+    background-color: #FFEDD3;
+    .receipt-notification__left {
+      .desc {
+        color: #DF880B;
+      }
+    }
+  }
+}

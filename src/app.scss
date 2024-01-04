@@ -1,0 +1,9 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/utilities';
+@import 'tailwindcss/components';
+@import '@/theme/default.scss';
+
+html, page, page {
+  font-size: 14px;
+  color: var(--color-black--primary);
+}

@@ -1,0 +1,8 @@
+.vip-center{
+  .active {
+    @apply tw-border-primary;
+    background: linear-gradient(99deg, #F9D4FD 0%, #EEF2FF 59.78%, #D0CAFF 97.26%);
+    border-radius: 8px;
+    min-width: 158px;
+  }
+}

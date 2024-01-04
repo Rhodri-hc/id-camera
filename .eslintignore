@@ -1,0 +1,4 @@
+node_modules
+dist
+next-env.d.ts
+__tests__

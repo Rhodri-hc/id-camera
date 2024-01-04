@@ -1,0 +1,32 @@
+.modeling{
+  &-swiper {
+    :global(.van-swiper__pagination) {
+      left: 20px;
+      bottom: 32px;
+      transform: translateX(0);
+    }
+  }
+  &-scroll {
+    .scroll-item{
+      @apply tw-flex-1 tw-min-w-fit;
+      &__text {
+        @apply tw-text-sm;
+        color: rgba(19, 20, 21, 0.36);
+        transition: font-size 0.05s linear;
+        &:not(:last-child) {
+          margin-right: 24px;
+        }
+        &.active {
+          @apply tw-text-primary tw-text-xl tw-font-medium tw-relative;
+          &:before {
+            @apply tw-bg-primary tw-absolute tw-rounded-md tw-h-1 tw-w-3.5 tw-left-1/2 -tw-translate-x-1/2;
+            bottom: 0px;
+            content: '';
+          }
+
+        }
+      }
+    }
+  }
+}
+
