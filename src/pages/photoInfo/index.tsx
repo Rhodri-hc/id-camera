@@ -8,6 +8,7 @@ import receiptIcon from '@/assets/icons/receipt.png'
 import bannerImg from '@/assets/images/img_banner_size_show.png'
 import noticeImg from '@/assets/images/receipt_notice.png'
 import tickImg from '@/assets/images/tick.png'
+import { backGroundColorConfigList } from './config'
 
 export default function PhotoInfo() {
   return (
@@ -47,9 +48,17 @@ export default function PhotoInfo() {
         </View>
       </View>
       <View className={`${styles['photo-info__details']}`}>
-        <View className={`${styles['details-item']}`}>
+        <View className={`${styles['details-item']} tw-items-center tw-justify-between`}>
           <Text className={`${styles['details-item__key']}`}>背景颜色</Text>
-          <View className={`${styles['details-item__value']}`}></View>
+          <View className={`${styles['details-item__value']} tw-flex tw-justify-end`}>
+            {backGroundColorConfigList.map(item => (
+              <View
+                key={item.value}
+                style={{ background: item.color }}
+                className='tw-rounded-full tw-w-3 tw-h-3 tw-ml-3'
+              ></View>
+            ))}
+          </View>
         </View>
         <View className={`${styles['details-item']}`}>
           <Text className={`${styles['details-item__key']}`}>文件大小</Text>
