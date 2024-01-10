@@ -8,7 +8,7 @@ import { ReceiptNotification, PhotoCard } from '@/components'
 import useList from '@/hooks/useList'
 import * as OrderAction from '@/services/modules/order'
 import * as PhotoAction from '@/services/modules/photo'
-import type { IPhotoSizeTypeItem } from '@/types/photo'
+import type { IPhotoSizeTypeItem, IPhotoSizeItem } from '@/types/photo'
 import type { IPaymentConfig } from '@/types/order'
 
 export default function Home() {
@@ -17,13 +17,11 @@ export default function Home() {
   const [paymentConfig, setPaymentConfig] = useState<IPaymentConfig>()
   const InfiniteScrollInstance = useRef<InfiniteScrollInstance>()
   const {
-    hasMore,
     loadMore,
     search,
     list: photoSizeList
   } = useList({
     fetchList: PhotoAction.getPhotoSizeList,
-    initRequest: false,
     queryParams: { productId: '' }
   })
 
@@ -41,13 +39,33 @@ export default function Home() {
   })
 
   const handleSelectPhotoSizeType = (item: IPhotoSizeTypeItem) => {
+    InfiniteScrollInstance.current?.reset()
     setCurrentPhotoSizeType(item)
     search({ productId: paymentConfig?.productId, type: item.name })
   }
 
+  const handleClickPhotoCard = (item: IPhotoSizeItem) => {
+    Taro.navigateTo({
+      url: `/pages/photoInfo/index?id=${item.id}`,
+      events: {
+        // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
+        acceptDataFromOpenedPage: function (data) {
+          console.log(data)
+        },
+        someEvent: function (data) {
+          console.log(data)
+        }
+      },
+      success: function (res) {
+        // 通过eventChannel向被打开页面传送数据
+        res.eventChannel.emit('acceptDataFromOpenerPage', { data: 'test' })
+      }
+    })
+  }
+
   return (
     <View className={`${styles['home']}`}>
-      <Swiper
+      {/* <Swiper
         className={styles['home-swiper']}
         height='210'
         paginationColor='#426543'
@@ -58,14 +76,14 @@ export default function Home() {
         <SwiperItem>A</SwiperItem>
         <SwiperItem>B</SwiperItem>
         <SwiperItem>C</SwiperItem>
-      </Swiper>
+      </Swiper> */}
       <View
         className={`tw-p-4 tw-bg-[#F7F8FC] -tw-mt-4 tw-rounded-tl-2xl tw-rounded-tr-2xl ${styles['home-container']}`}
       >
-        <ReceiptNotification
+        {/* <ReceiptNotification
           title='广东深圳市居民身份证回执申请'
           desc='审核通过，请前往下载电子版回执'
-        />
+        /> */}
         <View
           className={`${styles['home-scroll']} tw-pt-3 tw-bg-[#F7F8FC] tw-flex tw-overflow-x-scroll tw-sticky tw-top-0 tw-z-10`}
         >
@@ -77,7 +95,7 @@ export default function Home() {
             >
               <View
                 className={` tw-py-1.5 tw-px-4.5 tw-box-border ${
-                  index === 0 ? styles['active'] : ''
+                  item.name === currentPhotoSizeType?.name ? styles['active'] : ''
                 }`}
               >
                 <Image src={item.picBase64} className=' tw-w-6 tw-h-6' />
@@ -95,6 +113,7 @@ export default function Home() {
                 title={item.title}
                 tag={item.tag}
                 desc={`${item.spec} | ${item.sizeName} | ${item.fileSize.replace(',', '-')}K`}
+                onClick={() => handleClickPhotoCard(item)}
               />
             ))}
           <InfiniteScroll loadMore={loadMore} ref={InfiniteScrollInstance} />

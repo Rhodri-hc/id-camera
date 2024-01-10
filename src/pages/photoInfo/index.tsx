@@ -4,12 +4,28 @@ import { Field, Button } from '@antmjs/vantui'
 import { chooseImage } from '@/utils/camera'
 import { useState } from 'react'
 import styles from '@/pages/photoInfo/index.module.scss'
-import testImg from '@/assets/icons/test.png'
+import receiptIcon from '@/assets/icons/receipt.png'
+import bannerImg from '@/assets/images/img_banner_size_show.png'
+import noticeImg from '@/assets/images/receipt_notice.png'
+import tickImg from '@/assets/images/tick.png'
 
 export default function PhotoInfo() {
   return (
     <View className={`${styles['photo-info']} tw-px-4 tw-bg-white`}>
-      <Image src={testImg} className='tw-w-full tw-mt-2' />
+      <View className='tw-w-full tw-mt-2 tw-relative'>
+        <View className=' tw-absolute tw-left-4 tw-top-0 tw-bottom-0 tw-my-auto tw-flex tw-flex-col tw-justify-center '>
+          <Text className=' tw-text-2xl tw-mb-2.5'>一寸照</Text>
+          <View className=' tw-flex tw-items-center tw-mb-2.5'>
+            <Image src={tickImg} className='tw-w-4 tw-h-4 tw-mr-1' />
+            <Text className='tw-text-sm tw-text-[#817b87]'>支持申请回执</Text>
+          </View>
+          <View className=' tw-flex tw-items-center tw-mb-2.5'>
+            <Image src={tickImg} className='tw-w-4 tw-h-4 tw-mr-1' />
+            <Text className='tw-text-sm tw-text-[#817b87]'>支持保存为电子版</Text>
+          </View>
+        </View>
+        <Image src={bannerImg} className='tw-w-full tw-h-40' />
+      </View>
       <View className={`${styles['photo-info__summary']}`}>
         {/* {[{key: '',value: ''}].map((item, index) => (
           <View key={index}>
@@ -48,13 +64,15 @@ export default function PhotoInfo() {
       </View>
       <View className={styles['photo-info__notice']}>
         <View className={`${styles['notice-subtitle']} tw-flex tw-items-center tw-mb-2`}>
-          <Image src={testImg} className=' tw-w-5 tw-h-5 tw-mr-1' />
+          <Image src={receiptIcon} className=' tw-w-5 tw-h-5 tw-mr-1' />
           <Text className='tw-text-xl tw-font-medium'>回执拍摄注意事项</Text>
         </View>
-        <View></View>
+        <View>
+          <Image src={noticeImg} className='tw-w-full tw-h-52 tw-mb-20' />
+        </View>
       </View>
       <View
-        className={`${styles['btn-group']} tw-fixed tw-bottom-0 tw-left-0 tw-right-0 tw-flex tw-justify-between tw-py-3 tw-px-4`}
+        className={`${styles['btn-group']} tw-bg-white tw-fixed tw-bottom-0 tw-left-0 tw-right-0 tw-flex tw-justify-between tw-py-3 tw-px-4`}
         style={{ boxShadow: '0px -1px 4px 0px rgba(0, 0, 0, 0.06)' }}
       >
         <View

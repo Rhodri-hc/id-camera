@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import type { IPageParams } from '@/types/common'
 import type { RequestReturns } from '@/services'
 import { InfiniteScrollProps } from '@antmjs/vantui'
+import { isString } from '@/utils/is'
 
 interface IBasicState<T = any> {
   fetchList: (
@@ -9,20 +10,18 @@ interface IBasicState<T = any> {
   ) => RequestReturns<{ totalPage: number; count: number; totalSize: number; list: T[] } | any>
   pagination?: IPageParams
   queryParams?: any
-  initRequest?: boolean
 }
 const defaultState: Partial<IBasicState> = {
-  pagination: { page: 1, pageSize: 10 },
-  queryParams: { page: 1, pageSize: 10 },
-  initRequest: true
+  pagination: { pageNum: 1, pageSize: 10 },
+  queryParams: { pageNum: 1, pageSize: 10 }
 }
 const useList = (options: IBasicState) => {
   const [pageParams, setPageParams] = useState(
     (options?.queryParams && { ...defaultState.queryParams, ...options.queryParams }) ||
       defaultState.queryParams
   )
-  const [hasMore, setHasMore] = useState<boolean>(false)
-  const [initRequest, setInitRequest] = useState<boolean>(defaultState.initRequest || true)
+  const [currentTotal, setCurrentTotal] = useState<number>(0)
+  const [initRequest, setInitRequest] = useState<boolean>(true)
   const [list, setList] = useState<any[]>([])
 
   /**
@@ -37,31 +36,31 @@ const useList = (options: IBasicState) => {
     return props
   }
   const state = mergeDefaultOptions(defaultState, options)
-  // setInitRequest(state.initRequest)
 
   const fetchList = async (fetchParams?: { isRefresh?: boolean; queryParams?: any }) => {
     const { isRefresh = false, queryParams = {} } = fetchParams || {}
     const params = { ...pageParams, ...queryParams }
-    if (hasMore) {
-      params.page++
-    }
+
+    console.log('before set hasmore', isRefresh, currentTotal, params.pageNum, list.length)
+
     if (isRefresh) {
-      params.page = state.pagination?.page
+      params.pageNum = state.pagination?.pageNum
       // params.queryParams = state.queryParams
+    } else {
+      if (currentTotal > list.length) {
+        params.pageNum++
+      } else {
+        return 'complete'
+      }
     }
+
     setPageParams({ ...params })
 
     const { data } = await state.fetchList(params)
     const { list: dataList, totalSize } = data
-    console.log(
-      'before set hasmore',
-      totalSize,
-      params.page,
-      params.pageSize,
-      totalSize > params.page * params.pageSize
-    )
-    setHasMore(totalSize > params.page * params.pageSize)
-    setList(isRefresh || params.page === 1 ? dataList : [...(list || []), ...(dataList || [])])
+
+    setCurrentTotal(totalSize)
+    setList(isRefresh || params.pageNum === 1 ? dataList : [...(list || []), ...(dataList || [])])
     return dataList
   }
 
@@ -73,25 +72,33 @@ const useList = (options: IBasicState) => {
    * @desc 加载更多
    */
   const loadMore: InfiniteScrollProps['loadMore'] = async () => {
-    // if (initRequest) {
-    const dataList = await fetchList()
-    console.log(
-      'return params',
-      dataList?.length || 0 < (state.pagination?.pageSize as number) ? 'complete' : 'loading'
-    )
-    return dataList?.length < (state.pagination?.pageSize as number) ? 'complete' : 'loading'
-    // } else {
-    //   setInitRequest(true)
-    //   return 'loading'
-    // }
+    if (!initRequest) {
+      const dataList = await fetchList()
+
+      console.log('dataList', dataList)
+
+      if (isString(dataList)) {
+        return dataList as 'complete' | 'loading' | 'error'
+      } else {
+        console.log(
+          'return params',
+          dataList?.length || 0 < (state.pagination?.pageSize as number) ? 'complete' : 'loading'
+        )
+        return dataList?.length < (state.pagination?.pageSize as number) ? 'complete' : 'loading'
+      }
+    } else {
+      setInitRequest(false)
+      return 'loading'
+    }
   }
 
   /**
    * @desc 查询
    */
   const search = async (params: any) => {
-    setPageParams({ ...pageParams, ...params, page: 1 })
-    fetchList({ isRefresh: true, queryParams: { ...pageParams, ...params, page: 1 } })
+    setCurrentTotal(0)
+    setPageParams({ ...pageParams, ...params, pageNum: 1 })
+    fetchList({ isRefresh: true, queryParams: { ...pageParams, ...params, pageNum: 1 } })
   }
 
   return {
@@ -99,7 +106,6 @@ const useList = (options: IBasicState) => {
     loadMore,
     search,
     fetchList,
-    hasMore,
     list
   }
 }

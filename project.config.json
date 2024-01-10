@@ -1,7 +1,7 @@
 {
     "miniprogramRoot": "dist/",
-    "projectname": "微糖证件照",
-    "description": "微糖证件照",
+    "projectname": "轻糖证件照",
+    "description": "轻糖证件照",
     "appid": "wx55d34a3d58657669",
     "setting": {
         "urlCheck": true,
@@ -15,7 +15,8 @@
             "ignore": [],
             "disablePlugins": [],
             "outputPath": ""
-        }
+        },
+        "condition": false
     },
     "compileType": "miniprogram",
     "libVersion": "3.2.4",
