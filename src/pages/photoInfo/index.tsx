@@ -1,7 +1,7 @@
 import { View, Text, Image } from '@tarojs/components'
-import { useLoad } from '@tarojs/taro'
+import Taro, { useLoad } from '@tarojs/taro'
 import { Field, Button } from '@antmjs/vantui'
-import { chooseImage } from '@/utils/camera'
+import { chooseImage, takePhoto } from '@/utils/camera'
 import { useState } from 'react'
 import styles from '@/pages/photoInfo/index.module.scss'
 import receiptIcon from '@/assets/icons/receipt.png'
@@ -11,6 +11,26 @@ import tickImg from '@/assets/images/tick.png'
 import { backGroundColorConfigList } from './config'
 
 export default function PhotoInfo() {
+  // 前往拍摄页
+  const goCameraPage = () => {
+    Taro.navigateTo({
+      url: `/pages/camera/index`,
+      events: {
+        // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
+        acceptDataFromOpenedPage: function (data) {
+          console.log(data)
+        },
+        someEvent: function (data) {
+          console.log(data)
+        }
+      },
+      success: function (res) {
+        // 通过eventChannel向被打开页面传送数据
+        res.eventChannel.emit('acceptDataFromOpenerPage', { data: 'test' })
+      }
+    })
+  }
+
   return (
     <View className={`${styles['photo-info']} tw-px-4 tw-bg-white`}>
       <View className='tw-w-full tw-mt-2 tw-relative'>
@@ -87,11 +107,13 @@ export default function PhotoInfo() {
         <View
           className={`${styles['btn']} tw-text-primary`}
           style={{ backgroundColor: 'rgba(126, 106, 255, 0.12)' }}
+          onClick={chooseImage}
         >
           相册导入
         </View>
         <View
           className={`${styles['btn']} tw-bg-[rgba(126, 106, 255, 0.12)] tw-text-white tw-bg-primary`}
+          onClick={goCameraPage}
         >
           立即拍摄
         </View>

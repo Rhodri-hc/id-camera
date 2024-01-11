@@ -6,7 +6,8 @@ export default defineAppConfig({
     'pages/vipCenter/index',
     'pages/mine/index',
     'pages/modeling/index',
-    'pages/photoInfo/index'
+    'pages/photoInfo/index',
+    'pages/submitOrder/index'
   ],
   window: {
     backgroundTextStyle: 'light',

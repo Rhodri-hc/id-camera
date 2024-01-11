@@ -154,7 +154,7 @@ export default function PhotoPreview() {
         />
       </View>
       {/* 底部栏 */}
-      <View className='tw-fixed tw-left-0 tw-right-0 tw-bottom-0 tw-bg-white tw-rounded-[16px_16px_0px_px]'>
+      <View className='tw-fixed tw-left-0 tw-right-0 tw-bottom-0 tw-bg-white tw-rounded-[16px_16px_0px_0px]'>
         <View>
           <View className='tw-p-6 tw-pb-0'>
             {/* 导航栏 */}

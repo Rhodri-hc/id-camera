@@ -9,6 +9,27 @@
         "miniprogram": {
             "list": [
                 {
+                    "name": "pages/submitOrder/index",
+                    "pathName": "pages/submitOrder/index",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "pages/photoPreview/index",
+                    "pathName": "pages/photoPreview/index",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "/pages/camera/index",
+                    "pathName": "/pages/camera/index",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
                     "name": "pages/photoInfo/index",
                     "pathName": "pages/photoInfo/index",
                     "query": "id=1",
