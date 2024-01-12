@@ -4,3 +4,30 @@
   &-preview {
   }
 }
+
+.photo {
+  margin-top: -30px;
+
+  &-small {
+    width: calc((100% - 30px) / 4);
+    margin-right: 10px;
+
+    &-mb {
+      margin-bottom: 10px;
+    }
+
+    &:nth-child(4n) {
+      margin-right: 0;
+    }
+  }
+
+  &-list {
+    overflow-x: overlay;
+  }
+
+  &-item {
+    &--choose {
+      border-color: #7e6aff;
+    }
+  }
+}
